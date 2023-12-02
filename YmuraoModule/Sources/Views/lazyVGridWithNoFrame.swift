@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// frameを使用しないGridView
 var lazyVGridWithoutFrameModifier: some View {
     LazyVGrid(
         columns:  .init(repeating: .init(.flexible(), spacing: 0), count: 3)

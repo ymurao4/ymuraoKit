@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// 横スクロール可能な長いテキストの初期表示位置を右端にする
 var textStartAtTrailing: some View {
     ScrollViewReader { proxy in
         ScrollView(.horizontal, showsIndicators: false) {

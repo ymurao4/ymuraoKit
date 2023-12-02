@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// 角丸のボタン
 var cornerRadiusButton: some View {
     Button(action: {}) {
         Text("角丸ボタン")

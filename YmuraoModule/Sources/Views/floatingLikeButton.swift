@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// いいねボタン
 var floatingLikeButton: some View {
     VStack(spacing: 0) {
         Color.orange
