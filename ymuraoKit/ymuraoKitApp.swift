@@ -1,12 +1,6 @@
-//
-//  ymuraoKitApp.swift
-//  ymuraoKit
-//
-//  Created by 村尾慶伸 on 2023/12/02.
-//
-
 import SwiftUI
 import SwiftData
+import Views
 
 @main
 struct ymuraoKitApp: App {
@@ -25,7 +19,9 @@ struct ymuraoKitApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView {
+                Text("Initial Window")
+            }
         }
         .modelContainer(sharedModelContainer)
     }

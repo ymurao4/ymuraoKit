@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		041C24622B1B4B6C001D83D1 /* ymuraoKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C24612B1B4B6C001D83D1 /* ymuraoKitApp.swift */; };
-		041C24642B1B4B6C001D83D1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C24632B1B4B6C001D83D1 /* ContentView.swift */; };
 		041C24662B1B4B6C001D83D1 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C24652B1B4B6C001D83D1 /* Item.swift */; };
 		041C24682B1B4B6C001D83D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 041C24672B1B4B6C001D83D1 /* Assets.xcassets */; };
 		041C246C2B1B4B6C001D83D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 041C246B2B1B4B6C001D83D1 /* Preview Assets.xcassets */; };
+		041C24752B1B4CB5001D83D1 /* YmuraoModule in Frameworks */ = {isa = PBXBuildFile; productRef = 041C24742B1B4CB5001D83D1 /* YmuraoModule */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		041C245E2B1B4B6C001D83D1 /* ymuraoKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ymuraoKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		041C24612B1B4B6C001D83D1 /* ymuraoKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ymuraoKitApp.swift; sourceTree = "<group>"; };
-		041C24632B1B4B6C001D83D1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		041C24652B1B4B6C001D83D1 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		041C24672B1B4B6C001D83D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		041C24692B1B4B6C001D83D1 /* ymuraoKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ymuraoKit.entitlements; sourceTree = "<group>"; };
 		041C246B2B1B4B6C001D83D1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		041C24722B1B4C42001D83D1 /* YmuraoModule */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = YmuraoModule; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041C24752B1B4CB5001D83D1 /* YmuraoModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,8 +39,10 @@
 		041C24552B1B4B6C001D83D1 = {
 			isa = PBXGroup;
 			children = (
+				041C24722B1B4C42001D83D1 /* YmuraoModule */,
 				041C24602B1B4B6C001D83D1 /* ymuraoKit */,
 				041C245F2B1B4B6C001D83D1 /* Products */,
+				041C24732B1B4CB5001D83D1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				041C24612B1B4B6C001D83D1 /* ymuraoKitApp.swift */,
-				041C24632B1B4B6C001D83D1 /* ContentView.swift */,
 				041C24652B1B4B6C001D83D1 /* Item.swift */,
 				041C24672B1B4B6C001D83D1 /* Assets.xcassets */,
 				041C24692B1B4B6C001D83D1 /* ymuraoKit.entitlements */,
@@ -70,6 +72,13 @@
 				041C246B2B1B4B6C001D83D1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		041C24732B1B4CB5001D83D1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,6 +97,9 @@
 			dependencies = (
 			);
 			name = ymuraoKit;
+			packageProductDependencies = (
+				041C24742B1B4CB5001D83D1 /* YmuraoModule */,
+			);
 			productName = ymuraoKit;
 			productReference = 041C245E2B1B4B6C001D83D1 /* ymuraoKit.app */;
 			productType = "com.apple.product-type.application";
@@ -142,7 +154,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				041C24642B1B4B6C001D83D1 /* ContentView.swift in Sources */,
 				041C24662B1B4B6C001D83D1 /* Item.swift in Sources */,
 				041C24622B1B4B6C001D83D1 /* ymuraoKitApp.swift in Sources */,
 			);
@@ -296,7 +307,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yoshinobuMurao.ymuraoKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -334,7 +346,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yoshinobuMurao.ymuraoKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -363,6 +376,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		041C24742B1B4CB5001D83D1 /* YmuraoModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = YmuraoModule;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 041C24562B1B4B6C001D83D1 /* Project object */;
 }

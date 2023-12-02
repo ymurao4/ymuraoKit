@@ -1,10 +1,3 @@
-//
-//  Item.swift
-//  ymuraoKit
-//
-//  Created by 村尾慶伸 on 2023/12/02.
-//
-
 import Foundation
 import SwiftData
 
