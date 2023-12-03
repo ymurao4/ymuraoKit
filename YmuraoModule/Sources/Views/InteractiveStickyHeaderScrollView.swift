@@ -2,38 +2,36 @@ import SwiftUI
 
 public struct InteractiveStickyHeaderScrollView: View {
     @State var offset: CGFloat = .zero
-    @State var shouldShowSticky: Bool = true
-
+    @State var shouldShowStickyView: Bool = true
+    
     public init() {}
     
     public var body: some View {
         NavigationView {
-            VStack {
-                ScrollViewOffsetReader(offset: $offset) {
-                    ForEach(0..<100, id: \.self) { i in
-                        Text("\(i)hogehoge")
-                    }
+            ScrollViewOffsetReader(offset: $offset) {
+                ForEach(0...100, id: \.self) { i in
+                    cell(i)
                 }
-                .onChange(of: offset) { old, new in
-                    if offset >= 0 {
-                        shouldShowSticky = true
-                    } else {
-                        shouldShowSticky = old <= new
-                    }
+            }
+            .onChange(of: offset) { oldValue, newValue in
+                if offset >= 0 {
+                    shouldShowStickyView = true
+                } else {
+                    shouldShowStickyView = oldValue <= newValue
                 }
-                /// under iOS16
-                /*
-                 .onChange(of: offset) { [offset] newValue in
-                    if newValue >= 0 {
-                        shouldShowSticky = true
-                    } else {
-                        shouldShowSticky = offset <= newValue
-                    }
+            }
+            /// under iOS16
+            /*
+            .onChange(of: offset) { [offset] newValue in
+                if newValue >= 0 {
+                    shouldShowStickyView = true
+                } else {
+                    shouldShowStickyView = offset <= newValue
                 }
-                 */
-                .safeAreaInset(edge: .top) {
-                    stickyView
-                }
+            }
+            */
+            .safeAreaInset(edge: .top, spacing: 0) {
+                stickyView
             }
             .navigationTitle("hoge")
             .navigationBarTitleDisplayMode(.inline)
@@ -45,10 +43,16 @@ public struct InteractiveStickyHeaderScrollView: View {
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 40)
-            .background(Color.white)
-            .offset(y: shouldShowSticky ? 0 : -40)
-            .opacity(shouldShowSticky ? 1 : 0)
-            .animation(.easeIn, value: shouldShowSticky)
+            .background(Color.orange)
+            .offset(y: shouldShowStickyView ? 0 : -40)
+            .opacity(shouldShowStickyView ? 1 : 0)
+            .animation(.easeIn, value: shouldShowStickyView)
+    }
+    
+    func cell(_ i: Int) -> some View {
+        Text("\(i)：hogehoge")
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
