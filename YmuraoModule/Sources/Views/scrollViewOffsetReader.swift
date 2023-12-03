@@ -42,7 +42,6 @@ fileprivate struct ScrollViewOffsetPreferenceKey: PreferenceKey {
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {}
 }
 
-
 #Preview {
     @State var offset: CGFloat = .zero
     return VStack {
