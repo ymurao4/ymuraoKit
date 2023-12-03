@@ -19,9 +19,7 @@ struct ymuraoKitApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView {
-                Text("Initial Window")
-            }
+            ContentView()
         }
         .modelContainer(sharedModelContainer)
     }

@@ -1,20 +1,13 @@
 import SwiftUI
 
-public struct ContentView<Content: View>: View {
-    let content: () -> Content
-    
-    public init(content: @escaping () -> Content) {
-        self.content = content
-    }
+public struct ContentView: View {
+    public init() {}
     
     public var body: some View {
-        content()
-            .padding()
+        ScrollViewSafeAreaInsetHideShowView()
     }
 }
 
 #Preview {
-    ContentView {
-        Text("hoge")
-    }
+    ContentView()
 }
