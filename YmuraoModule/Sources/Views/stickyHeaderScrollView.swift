@@ -10,7 +10,7 @@ struct AnimatedTextView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            Text("購入待ち")
+            Text("読み込み中")
                 .font(.title)
                 .foregroundStyle(Color.gray)
             Text("...")
@@ -19,6 +19,7 @@ struct AnimatedTextView: View {
                 .overlay {
                     Text(dots)
                         .font(.title)
+                        .foregroundStyle(Color.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .onReceive(timer) { _ in
                             if dotCount < 3 {
