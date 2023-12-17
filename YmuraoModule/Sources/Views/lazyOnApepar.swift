@@ -6,40 +6,38 @@ import SwiftUI
 struct LazyOnApeparView: View {
     var body: some View {
         ScrollView {
-            LazyVStack {
+            VStack {
                 LazyVStack {
-                    ForEach(0..<50, id: \.self) { i in
-                        Text(String(i))
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color.gray.opacity(0.4))
+                    ForEach(0..<25, id: \.self) { i in
+                        CellView(i: i)
                             .onAppear {
                                 print("upper:" + String(i))
                             }
                     }
                 }
+                .background(Color.gray.opacity(0.4))
                 LazyVStack {
-                    ForEach(0..<50, id: \.self) { i in
-                        Text(String(i))
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color.red.opacity(0.4))
+                    ForEach(25..<50, id: \.self) { i in
+                        CellView(i: i)
                             .onAppear {
                                 print("middle:" + String(i))
                             }
                     }
                 }
+                .background(Color.red.opacity(0.4))
                 LazyVStack {
-                    ForEach(0..<50, id: \.self) { i in
-                        Text(String(i))
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color.blue.opacity(0.4))
+                    ForEach(50..<75, id: \.self) { i in
+                        CellView(i: i)
                             .onAppear {
                                 print("lower:" + String(i))
                             }
                     }
                 }
+                .background(Color.blue.opacity(0.4))
+                Text("表示されたぞ！！！")
+                    .onAppear {
+                        print("表示されたぞ！！！")
+                    }
             }
         }
     }
@@ -47,4 +45,19 @@ struct LazyOnApeparView: View {
 
 #Preview {
     LazyOnApeparView()
+}
+
+
+struct CellView: View {
+    let i: Int
+
+    init(i: Int) {
+        self.i = i
+    }
+    
+    var body: some View {
+        Text(String(i))
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
 }
