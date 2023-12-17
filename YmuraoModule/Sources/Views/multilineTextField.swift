@@ -67,7 +67,6 @@ extension TextEditorView {
                     .cornerRadius(10.0)
                     .shadow(radius: 1.0)
                     .padding()
-                    .id("textEditor")
                     .focused($isFocused)
             }
             .padding(.horizontal, 32)
