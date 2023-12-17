@@ -31,7 +31,7 @@ let package = Package(
             name: .views,
             dependencies: [
                 .asset,
-                .swiftAlgorithms
+                .product(name: "Algorithms", package: "swift-algorithms")
             ]
         )
     ]
