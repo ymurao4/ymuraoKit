@@ -9,42 +9,11 @@ struct TextEditorView: View {
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
-                ScrollViewReader { reader in
-                    ScrollView {
-                        VStack {
-                            Text("hogehoge")
-                            ZStack(alignment: .leading) {
-                                Text(text ?? placeholder)
-                                    .font(.system(.body))
-                                    .foregroundColor(.clear)
-                                    .padding(14)
-                                    .frame(height: max(40, geometry.size.height - 32))
-                                    .opacity(text == nil ? 1 : 0)
-                                    .background(
-                                        GeometryReader {
-                                            Color.clear.preference(
-                                                key: ViewHeightKey.self,
-                                                value: $0.frame(in: .local).size.height
-                                            )
-                                        }
-                                    )
-                                TextEditor(text: Binding($text, replacingNilWith: ""))
-                                    .font(.system(.body))
-                                    .frame(height: max(40, geometry.size.height - 32))
-                                    .cornerRadius(10.0)
-                                    .shadow(radius: 1.0)
-                                    .padding()
-                                    .id("textEditor")
-                                    .focused($isFocused)
-                            }
-                            .padding(.horizontal, 32)
-                            .onPreferenceChange(ViewHeightKey.self) {
-                                textEditorHeight = $0
-                            }
-                            .onChange(of: text) {
-                                reader.scrollTo("textEditor", anchor: .bottom)
-                            }
-                        }
+                ScrollView {
+                    if #available(iOS 16, *) {
+                        textField(geometry: geometry)
+                    } else {
+                        textEditor(geometry: geometry)
                     }
                 }
             }
@@ -58,6 +27,52 @@ struct TextEditorView: View {
                         Image(systemName: "star")
                     })
                 }
+            }
+        }
+    }
+}
+
+extension TextEditorView {
+    func textField(geometry: GeometryProxy) -> some View {
+        TextField("Address", text: Binding($text, replacingNilWith: ""), axis: .vertical)
+            .focused($isFocused)
+            .frame(minHeight: 40)
+            .frame(maxHeight: geometry.size.height - 32)
+            .border(Color.black)
+            .padding()
+    }
+
+    func textEditor(geometry: GeometryProxy) -> some View {
+        VStack {
+            ZStack(alignment: .leading) {
+                Text(text ?? placeholder)
+                    .font(.system(.body))
+                    .foregroundColor(.clear)
+                    .padding(14)
+                    .frame(minHeight: 40)
+                    .frame(maxHeight: geometry.size.height - 32)
+                    .opacity(text == nil ? 1 : 0)
+                    .background(
+                        GeometryReader {
+                            Color.clear.preference(
+                                key: ViewHeightKey.self,
+                                value: $0.frame(in: .local).size.height
+                            )
+                        }
+                    )
+                TextEditor(text: Binding($text, replacingNilWith: ""))
+                    .font(.system(.body))
+                    .frame(minHeight: 40)
+                    .frame(maxHeight: geometry.size.height - 32)
+                    .cornerRadius(10.0)
+                    .shadow(radius: 1.0)
+                    .padding()
+                    .id("textEditor")
+                    .focused($isFocused)
+            }
+            .padding(.horizontal, 32)
+            .onPreferenceChange(ViewHeightKey.self) {
+                textEditorHeight = $0
             }
         }
     }
