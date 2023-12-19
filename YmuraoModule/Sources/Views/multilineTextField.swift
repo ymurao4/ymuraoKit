@@ -1,5 +1,34 @@
 import SwiftUI
 
+struct TextFieldParentView: View {
+    @FocusState private var focusedTextfield: FocusField?
+    @State private var input1 = "Hi"
+    @State private var input2 = "Hi2"
+
+    enum FocusField: Hashable {
+            case textfield1, textfield2
+    }
+
+    var body: some View {
+        VStack {
+            TextField("", text: $input1)
+                .focused($focusedTextfield, equals: .textfield1)
+            TextEditorView()
+                .focused($focusedTextfield, equals: .textfield2)
+        }
+        .border(Color.black)
+        .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button {
+                    focusedTextfield = nil
+                } label: {
+                    Image(systemName: "star")
+                }
+            }
+        }
+    }
+}
+
 struct TextEditorView: View {
     @State private var text: String?
     @State private var textEditorHeight : CGFloat = 20
@@ -7,44 +36,26 @@ struct TextEditorView: View {
     @FocusState private var isFocused: Bool
     
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                ScrollViewReader { reader in
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(0..<20, id: \.self) { _ in
-                                Text("Foo")
-                                    .padding()
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(Color.red.opacity(0.3))
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                            }
-                            if #available(iOS 16, *) {
-                                textField(geometry: geometry)
-                                    .id("textField")
-                            } else {
-                                textEditor(geometry: geometry)
-                                    .id("textField")
-                            }
+        GeometryReader { geometry in
+            ScrollViewReader { reader in
+                ScrollView {
+                    LazyVStack {
+                        if #available(iOS 16, *) {
+                            textField(geometry: geometry)
+                                .id("textField")
+                        } else {
+                            textEditor(geometry: geometry)
+                                .id("textField")
                         }
                     }
-                    .onChange(of: text, { _, _ in
-                        reader.scrollTo("textField", anchor: .bottom)
-                    })
                 }
-            }
-            .navigationTitle("TextEditor")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .keyboard) {
-                    Button(action: {
-                        isFocused = false
-                    }, label: {
-                        Image(systemName: "star")
-                    })
-                }
+                .onChange(of: text, { _, _ in
+                    reader.scrollTo("textField", anchor: .bottom)
+                })
             }
         }
+        .navigationTitle("TextEditor")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
