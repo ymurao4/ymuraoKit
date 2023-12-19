@@ -9,12 +9,28 @@ struct TextEditorView: View {
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
-                ScrollView {
-                    if #available(iOS 16, *) {
-                        textField(geometry: geometry)
-                    } else {
-                        textEditor(geometry: geometry)
+                ScrollViewReader { reader in
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(0..<20, id: \.self) { _ in
+                                Text("Foo")
+                                    .padding()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(Color.red.opacity(0.3))
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                            }
+                            if #available(iOS 16, *) {
+                                textField(geometry: geometry)
+                                    .id("textField")
+                            } else {
+                                textEditor(geometry: geometry)
+                                    .id("textField")
+                            }
+                        }
                     }
+                    .onChange(of: text, { _, _ in
+                        reader.scrollTo("textField", anchor: .bottom)
+                    })
                 }
             }
             .navigationTitle("TextEditor")
@@ -37,7 +53,6 @@ extension TextEditorView {
         TextField("Address", text: Binding($text, replacingNilWith: ""), axis: .vertical)
             .focused($isFocused)
             .frame(minHeight: 40)
-            .frame(maxHeight: geometry.size.height - 32)
             .border(Color.black)
             .padding()
     }
